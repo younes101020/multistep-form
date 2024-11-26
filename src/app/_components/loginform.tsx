@@ -7,11 +7,15 @@ import React from "react";
 import { useStep } from "../_contexts/Multistepper";
 
 export function Login() {
-  const { goToNextStep, canGoToPrevStep, goToPrevStep } = useStep();
+  const { goToNextStep, canGoToPrevStep, goToPrevStep, canGoToNextStep } =
+    useStep();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // ...
-    goToNextStep();
+    if (canGoToNextStep) {
+      goToNextStep();
+    } else {
+      // last step submit handling
+    }
   };
 
   return (
@@ -54,7 +58,8 @@ export function Login() {
 
       <CardFooter className="flex px-0 pt-8 justify-between">
         <Button type="submit">
-          Next <ChevronRight />
+          {canGoToNextStep ? "Next" : "Finish"}
+          <ChevronRight />
         </Button>
         {canGoToPrevStep && (
           <Button onClick={goToPrevStep} className="bg-secondary">
