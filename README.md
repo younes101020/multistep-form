@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# [Shadcn/ui x NextJS 15 multistep form](https://multistepform.younesfakallah.fr) &middot; [![Author Younès](https://img.shields.io/badge/Author-Younès-%3C%3E)](https://younesfakallah.fr/blog)
 
-## Getting Started
+A multi-step form for Next.js built on top of [shadcn/ui](https://ui.shadcn.com) complete with desktop and mobile responsiveness.
 
-First, run the development server:
+## Features 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+⚙️ URL state based 
+🎨 @shadcn based 
+♾️ 1 to many step 
+🍳 Easy to use
+
+## Tech/framework used
+
+- Next.js 15
+- React Context
+- Shadcn/ui
+- Tailwind CSS
+- TypeScript
+
+## Use cases
+
+### How to add it into my project ?
+
+You have to export 3 files available in this repository into your project, namely: `./src/app/_contexts/StepProvider.tsx`, `./src/app/_components/StepsHeader.tsx`, and `./src/app/_hooks/useStep.tsx.`
+
+## How to use it ?
+
+Wrap your steps in StepProvider. The order of the steps is determined by their placement within the StepProvider. Example:
+
+```tsx
+<StepProvider>
+  <Login />
+  <Synchronize />
+  <CreateTeam />
+</StepProvider>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Here, Login will be considered as the first step, and CreateTeam will be the last one.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You also have to add some description about your step inside `STEP_METADATA` object you will find it inside `./src/app/_components/StepsHeader.tsx` 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### How to start my project from this ?
 
-## Learn More
+Clone repository
+```bash
+git clone git@github.com:younes101020/multistep-form.git
+```
 
-To learn more about Next.js, take a look at the following resources:
+Install dependencies
+```bash
+yarn install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Preview with dev environment
+```bash
+yarn dev
+```
