@@ -4,10 +4,10 @@ A multi-step form for Next.js built on top of [shadcn/ui](https://ui.shadcn.com)
 
 ## Features 
 
-⚙️ URL state based 
-🎨 @shadcn based 
-♾️ 1 to many step 
-🍳 Easy to use
+- ⚙️ URL state based 
+- 🎨 @shadcn based 
+- ♾️ 1 to many step 
+- 🍳 Easy to use
 
 ## Tech/framework used
 
