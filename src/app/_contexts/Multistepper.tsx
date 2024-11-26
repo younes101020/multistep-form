@@ -1,9 +1,15 @@
 "use client";
 
 import { CardContent } from "@/components/ui/card";
-import React, { createContext, ReactNode, Suspense, useContext } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, {
+  createContext,
+  ReactNode,
+  Suspense,
+  useCallback,
+  useContext,
+} from "react";
 import { StepsHeader } from "../_components/stepsheader";
-import { useStepHook } from "../_hooks/useStep";
 
 export type UseStepActionsProps = {
   helpers: UseStepActions;
@@ -28,39 +34,77 @@ export function useStep(): UseStepActions {
   return context;
 }
 
-export function StepProvider({ children }: { children: ReactNode }) {
-  const [currentStep, helpers] = useStepHook(React.Children.count(children));
+type SetStepCallbackType = (step: number | ((step: number) => number)) => void;
 
-  const {
-    goToNextStep,
-    goToPrevStep,
-    canGoToNextStep,
-    canGoToPrevStep,
-    setStep,
-    reset,
-  } = helpers;
+function BaseStepProvider({ children }: { children: ReactNode }) {
+  const maxStep = React.Children.count(children);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentStep = Number(searchParams.get("step") || "1");
+
+  const canGoToNextStep = currentStep + 1 <= maxStep;
+  const canGoToPrevStep = currentStep - 1 > 0;
+
+  const setStep = useCallback<SetStepCallbackType>(
+    step => {
+      const newStep = typeof step === "function" ? step(currentStep) : step;
+
+      if (newStep >= 1 && newStep <= maxStep) {
+        const params = new URLSearchParams(searchParams);
+        params.set("step", newStep.toString());
+        router.push(`?${params.toString()}`);
+        return;
+      }
+
+      throw new Error("Step not valid");
+    },
+    [maxStep, currentStep, router, searchParams],
+  );
+
+  const goToNextStep = useCallback(() => {
+    if (canGoToNextStep) {
+      setStep(step => step + 1);
+    }
+  }, [canGoToNextStep, setStep]);
+
+  const goToPrevStep = useCallback(() => {
+    if (canGoToPrevStep) {
+      setStep(step => step - 1);
+    }
+  }, [canGoToPrevStep, setStep]);
+
+  const reset = useCallback(() => {
+    setStep(1);
+  }, [setStep]);
 
   return (
+    <StepContext.Provider
+      value={{
+        goToNextStep,
+        goToPrevStep,
+        canGoToNextStep,
+        canGoToPrevStep,
+        setStep,
+        reset,
+        currentStep,
+      }}
+    >
+      <StepsHeader currentStep={currentStep} className="p-10" />
+      {React.Children.map(children, (child, index) => {
+        if (React.isValidElement(child) && index + 1 === currentStep) {
+          return <CardContent>{React.cloneElement(child)}</CardContent>;
+        }
+        return null;
+      })}
+    </StepContext.Provider>
+  );
+}
+
+// workaround hoc to prevent https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+export function StepProvider({ children }: { children: ReactNode }) {
+  return (
     <Suspense>
-      <StepContext.Provider
-        value={{
-          goToNextStep,
-          goToPrevStep,
-          canGoToNextStep,
-          canGoToPrevStep,
-          setStep,
-          reset,
-          currentStep,
-        }}
-      >
-        <StepsHeader currentStep={currentStep} className="p-10" />
-        {React.Children.map(children, (child, index) => {
-          if (React.isValidElement(child) && index + 1 === currentStep) {
-            return <CardContent>{React.cloneElement(child)}</CardContent>;
-          }
-          return null;
-        })}
-      </StepContext.Provider>
+      <BaseStepProvider>{children}</BaseStepProvider>
     </Suspense>
   );
 }

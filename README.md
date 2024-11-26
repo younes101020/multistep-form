@@ -22,9 +22,9 @@ complete with desktop and mobile responsiveness.
 
 ### How to add it into my project ?
 
-You have to export 3 files available in this repository into your project,
-namely: `./src/app/_contexts/StepProvider.tsx`,
-`./src/app/_components/StepsHeader.tsx`, and `./src/app/_hooks/useStep.tsx.`
+You have to export 2 files available in this repository into your project,
+namely: `./src/app/_contexts/StepProvider.tsx` and
+`./src/app/_components/StepsHeader.tsx`
 
 ### How to start my project from this ?
 
@@ -46,7 +46,6 @@ Preview with dev environment
 yarn dev
 ```
 
-
 ## How to use it ?
 
 Wrap your steps in StepProvider. The order of the steps is determined by their
@@ -64,7 +63,7 @@ Here, Login will be considered as the first step, and CreateTeam will be the
 last one.
 
 You can control the step flow directly from your step components using
-useStep().
+`useStep()`.
 
 ```tsx
 export function Login() {
@@ -77,9 +76,7 @@ export function Login() {
     reset,
     currentStep,
   } = useStep();
-  return (
-    <Button onClick={goToNextStep}>Next step</Button>
-  )
+  return <Button onClick={goToNextStep}>Next step</Button>;
 }
 ```
 
