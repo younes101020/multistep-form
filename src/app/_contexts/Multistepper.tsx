@@ -1,7 +1,7 @@
 "use client";
 
 import { CardContent } from "@/components/ui/card";
-import React, { createContext, ReactNode, useContext } from "react";
+import React, { createContext, ReactNode, Suspense, useContext } from "react";
 import { StepsHeader } from "../_components/stepsheader";
 import { useStepHook } from "../_hooks/useStep";
 
@@ -52,13 +52,15 @@ export function StepProvider({ children }: { children: ReactNode }) {
         currentStep,
       }}
     >
-      <StepsHeader currentStep={currentStep} className="p-10" />
-      {React.Children.map(children, (child, index) => {
-        if (React.isValidElement(child) && index + 1 === currentStep) {
-          return <CardContent>{React.cloneElement(child)}</CardContent>;
-        }
-        return null;
-      })}
+      <Suspense>
+        <StepsHeader currentStep={currentStep} className="p-10" />
+        {React.Children.map(children, (child, index) => {
+          if (React.isValidElement(child) && index + 1 === currentStep) {
+            return <CardContent>{React.cloneElement(child)}</CardContent>;
+          }
+          return null;
+        })}
+      </Suspense>
     </StepContext.Provider>
   );
 }
