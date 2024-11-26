@@ -57,15 +57,15 @@ export function Login() {
       </div>
 
       <CardFooter className="flex px-0 pt-8 justify-between">
-        <Button type="submit">
-          {canGoToNextStep ? "Next" : "Finish"}
-          <ChevronRight />
-        </Button>
         {canGoToPrevStep && (
           <Button onClick={goToPrevStep} className="bg-secondary">
             <ChevronLeft /> Previous
           </Button>
         )}
+        <Button type="submit">
+          {canGoToNextStep ? "Next" : "Finish"}
+          <ChevronRight />
+        </Button>
       </CardFooter>
     </form>
   );
