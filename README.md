@@ -26,6 +26,27 @@ You have to export 3 files available in this repository into your project,
 namely: `./src/app/_contexts/StepProvider.tsx`,
 `./src/app/_components/StepsHeader.tsx`, and `./src/app/_hooks/useStep.tsx.`
 
+### How to start my project from this ?
+
+Clone repository
+
+```bash
+git clone git@github.com:younes101020/multistep-form.git
+```
+
+Install dependencies
+
+```bash
+yarn install
+```
+
+Preview with dev environment
+
+```bash
+yarn dev
+```
+
+
 ## How to use it ?
 
 Wrap your steps in StepProvider. The order of the steps is determined by their
@@ -64,26 +85,6 @@ export function Login() {
 
 You also have to add some description about your step inside `STEP_METADATA`
 object you will find it inside `./src/app/_components/StepsHeader.tsx`.
-
-### How to start my project from this ?
-
-Clone repository
-
-```bash
-git clone git@github.com:younes101020/multistep-form.git
-```
-
-Install dependencies
-
-```bash
-yarn install
-```
-
-Preview with dev environment
-
-```bash
-yarn dev
-```
 
 > **_TIPS:_** The component uses React's Context API. When the context is
 > updated, all components subscribed to that context will re-render, which can
