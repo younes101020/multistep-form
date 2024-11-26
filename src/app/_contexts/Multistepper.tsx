@@ -41,18 +41,18 @@ export function StepProvider({ children }: { children: ReactNode }) {
   } = helpers;
 
   return (
-    <StepContext.Provider
-      value={{
-        goToNextStep,
-        goToPrevStep,
-        canGoToNextStep,
-        canGoToPrevStep,
-        setStep,
-        reset,
-        currentStep,
-      }}
-    >
-      <Suspense>
+    <Suspense>
+      <StepContext.Provider
+        value={{
+          goToNextStep,
+          goToPrevStep,
+          canGoToNextStep,
+          canGoToPrevStep,
+          setStep,
+          reset,
+          currentStep,
+        }}
+      >
         <StepsHeader currentStep={currentStep} className="p-10" />
         {React.Children.map(children, (child, index) => {
           if (React.isValidElement(child) && index + 1 === currentStep) {
@@ -60,7 +60,7 @@ export function StepProvider({ children }: { children: ReactNode }) {
           }
           return null;
         })}
-      </Suspense>
-    </StepContext.Provider>
+      </StepContext.Provider>
+    </Suspense>
   );
 }
