@@ -64,11 +64,4 @@ export function Login() {
 ```
 
 You also have to add some description about your steps inside `headerData` object
-you will find it inside `./src/app/_components/StepsHeader.tsx`.
-
-
-> **_TIPS:_** The component uses React's Context API. When the context is
-> updated, all components subscribed to that context will re-render, which can
-> impact the user experience, especially when you have many components. I
-> recommend placing the StepProvider as low as possible in your component tree
-> to minimize this impact.
+you will find it inside `@/components/step-header.tsx`.
