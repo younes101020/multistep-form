@@ -8,7 +8,6 @@ export const ui: Registry = [
     files: [
       "block/multistep-01/step.tsx",
       "block/multistep-01/step-header.tsx",
-      "block/multistep-01/step-form.tsx",
     ],
     dependencies: ["lucide-react"],
   },
