@@ -1,7 +1,6 @@
 "use client";
 
-import { CardContent } from "@/components/ui/card";
-import { StepsHeader } from "./step-header";
+import { Card, CardContent } from "@/components/ui/card";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, {
   createContext,
@@ -10,6 +9,7 @@ import React, {
   useCallback,
   useContext,
 } from "react";
+import { StepsHeader } from "./step-header";
 
 export type UseStepActionsProps = {
   helpers: UseStepActions;
@@ -89,13 +89,15 @@ function BaseStepProvider({ children }: { children: ReactNode }) {
         currentStep,
       }}
     >
-      <StepsHeader className="p-10" />
-      {React.Children.map(children, (child, index) => {
-        if (React.isValidElement(child) && index + 1 === currentStep) {
-          return <CardContent>{React.cloneElement(child)}</CardContent>;
-        }
-        return null;
-      })}
+      <Card className="w-[90%] lg:w-[60%]">
+        <StepsHeader className="p-10" />
+        {React.Children.map(children, (child, index) => {
+          if (React.isValidElement(child) && index + 1 === currentStep) {
+            return <CardContent>{React.cloneElement(child)}</CardContent>;
+          }
+          return null;
+        })}
+      </Card>
     </StepContext.Provider>
   );
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
 import localFont from "next/font/local";
-import { Roboto } from 'next/font/google' 
+import { ThemeProvider } from "./_components/theme-provider";
+import { ToggleTheme } from "./_components/theme-toggle";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -14,13 +16,12 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-
 const roboto = Roboto({
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  display: 'swap',
-})
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,11 +34,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.className} antialiased absolute inset-0 h-full w-full bg-black bg-[linear-gradient(to_right,rgba(188,185,184,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(188,185,184,0.1)_1px,transparent_1px)] bg-[size:24px_24px]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${roboto.className} antialiased absolute inset-0 h-full w-full dark:bg-black bg-[linear-gradient(to_right,rgba(188,185,184,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(188,185,184,0.1)_1px,transparent_1px)] bg-[size:24px_24px]`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ToggleTheme />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
