@@ -80,7 +80,7 @@ export function Login() {
 }
 ```
 
-You also have to add some description about your step inside `STEP_METADATA`
+You also have to add some description about your step inside `headerData`
 object you will find it inside `./src/app/_components/StepsHeader.tsx`.
 
 > **_TIPS:_** The component uses React's Context API. When the context is

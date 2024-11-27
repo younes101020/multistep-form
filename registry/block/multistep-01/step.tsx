@@ -1,6 +1,7 @@
 "use client";
 
 import { CardContent } from "@/components/ui/card";
+import { StepsHeader } from "@/registry/block/multistep-01/step-header";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, {
   createContext,
@@ -9,7 +10,6 @@ import React, {
   useCallback,
   useContext,
 } from "react";
-import { StepsHeader } from "../_components/stepsheader";
 
 export type UseStepActionsProps = {
   helpers: UseStepActions;
@@ -41,18 +41,21 @@ function BaseStepProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentStep = Number(searchParams.get("step") || "1");
+
   const canGoToNextStep = currentStep + 1 <= maxStep;
   const canGoToPrevStep = currentStep - 1 > 0;
 
   const setStep = useCallback<SetStepCallbackType>(
     step => {
       const newStep = typeof step === "function" ? step(currentStep) : step;
+
       if (newStep >= 1 && newStep <= maxStep) {
         const params = new URLSearchParams(searchParams);
         params.set("step", newStep.toString());
         router.push(`?${params.toString()}`);
         return;
       }
+
       throw new Error("Step not valid");
     },
     [maxStep, currentStep, router, searchParams],

@@ -1,6 +1,6 @@
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { useStep } from "../_contexts/Multistepper";
+import { useStep } from "./step";
 
 export const headerData = [
   {
@@ -17,7 +17,7 @@ export const headerData = [
   },
 ] as const;
 
-function BounceIndicator() {
+function Bounce() {
   return (
     <span className="relative flex h-2 w-2 pt-[.25rem]">
       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -42,7 +42,7 @@ export function StepsHeader({ className }: { className?: string }) {
         >
           <CardTitle className="flex gap-2 font-mono">
             <div className="z-20">{step.title}</div>
-            {i + 1 === currentStep && <BounceIndicator />}
+            {i + 1 === currentStep && <Bounce />}
           </CardTitle>
           <CardDescription className="italic">
             {step.description}
@@ -52,7 +52,6 @@ export function StepsHeader({ className }: { className?: string }) {
               absolute top-[-2rem] left-[-.8rem] text-muted-foreground font-bold text-6xl opacity-30
               before:content-[''] 
               before:absolute 
-              before:w-4 
             `}
           >
             {i + 1}

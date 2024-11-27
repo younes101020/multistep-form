@@ -11,12 +11,12 @@ export function MultiStepper() {
         <h1 className="border border-t-0 p-4 text-2xl font-thin italic underline decoration-primary underline-offset-4">
           Multi Stepper
         </h1>
-      </CardTitle><StepProvider>
-          <Login />
-          <Login />
-          <Login />
-        </StepProvider>
-
+      </CardTitle>
+      <StepProvider>
+        <Login />
+        <Login />
+        <Login />
+      </StepProvider>
     </Card>
   );
 }
