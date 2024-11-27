@@ -27,10 +27,6 @@ You can install the component using the Shadcn CLI
 npx shadcn add https://multistep-form-sooty.vercel.app/registry/multistep-01.json
 ```
 
-Or you can choose do it manually by exporting these 2 files available in this
-repository to your project, namely: `./src/app/_contexts/StepProvider.tsx` and
-`./src/app/_components/StepsHeader.tsx`
-
 ## How to use it ?
 
 Wrap your steps inside `StepProvider`. The order of the steps is determined by
