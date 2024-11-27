@@ -24,7 +24,7 @@ complete with desktop and mobile responsiveness.
 
 You can install the component using the Shadcn CLI
 ```bash
-npx npx shadcn add https://multistep-form-sooty.vercel.app/registry/multistep-01.json
+npx shadcn add https://multistep-form-sooty.vercel.app/registry/multistep-01.json
 ```
 
 Or you can choose do it manually by exporting these 2 files available in this
