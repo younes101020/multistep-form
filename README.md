@@ -37,11 +37,16 @@ Wrap your steps inside `StepProvider`. The order of the steps is determined by
 their placement within the StepProvider. Example:
 
 ```tsx
-<StepProvider>
-  <Login /> // First step
-  <Synchronize /> // Second step
-  <CreateTeam /> // Last step
-</StepProvider>
+export default function Page() {
+  return (
+    <StepProvider>
+      <Login />
+      <Synchronize />
+      <CreateTeam />
+    </StepProvider>
+  )
+}
+
 ```
 
 You can control the step flow directly from your step components using
