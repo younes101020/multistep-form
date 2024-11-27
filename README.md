@@ -22,48 +22,30 @@ complete with desktop and mobile responsiveness.
 
 ### How to add it into my project ?
 
-You have to export 2 files available in this repository into your project,
-namely: `./src/app/_contexts/StepProvider.tsx` and
+You can install the component using the Shadcn CLI
+```bash
+npx npx shadcn add https://multistep-form-sooty.vercel.app/registry/multistep-01.json
+```
+
+Or you can choose do it manually by exporting these 2 files available in this
+repository to your project, namely: `./src/app/_contexts/StepProvider.tsx` and
 `./src/app/_components/StepsHeader.tsx`
-
-### How to start my project from this ?
-
-Clone repository
-
-```bash
-git clone git@github.com:younes101020/multistep-form.git
-```
-
-Install dependencies
-
-```bash
-yarn install
-```
-
-Preview with dev environment
-
-```bash
-yarn dev
-```
 
 ## How to use it ?
 
-Wrap your steps in StepProvider. The order of the steps is determined by their
-placement within the StepProvider. Example:
+Wrap your steps inside `StepProvider`. The order of the steps is determined by
+their placement within the StepProvider. Example:
 
 ```tsx
 <StepProvider>
-  <Login />
-  <Synchronize />
-  <CreateTeam />
+  <Login /> // First step
+  <Synchronize /> // Second step
+  <CreateTeam /> // Last step
 </StepProvider>
 ```
 
-Here, Login will be considered as the first step, and CreateTeam will be the
-last one.
-
 You can control the step flow directly from your step components using
-`useStep()`.
+`useStep`.
 
 ```tsx
 export function Login() {
@@ -80,8 +62,9 @@ export function Login() {
 }
 ```
 
-You also have to add some description about your step inside `headerData`
-object you will find it inside `./src/app/_components/StepsHeader.tsx`.
+You also have to add some description about your steps inside `headerData` object
+you will find it inside `./src/app/_components/StepsHeader.tsx`.
+
 
 > **_TIPS:_** The component uses React's Context API. When the context is
 > updated, all components subscribed to that context will re-render, which can

@@ -1,7 +1,7 @@
 "use client";
 
 import { CardContent } from "@/components/ui/card";
-import { StepsHeader } from "@/registry/block/multistep-01/step-header";
+import { StepsHeader } from "./step-header";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, {
   createContext,

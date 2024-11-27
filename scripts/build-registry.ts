@@ -1,10 +1,10 @@
-import { registryItemFileSchema } from "@/registry/schema";
 import { promises as fs } from "fs";
 import path from "path";
 import { z } from "zod";
-import { registryComponents } from "../registry";
+import { registryComponents } from "../_registry_";
+import { registryItemFileSchema } from "../_registry_/schema";
 
-const REGISTRY_BASE_PATH = "registry";
+const REGISTRY_BASE_PATH = "_registry_";
 const PUBLIC_FOLDER_BASE_PATH = "public/registry";
 const COMPONENT_FOLDER_PATH = "components";
 
