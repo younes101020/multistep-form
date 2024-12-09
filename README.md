@@ -33,6 +33,8 @@ Wrap your steps inside `StepProvider`. The order of the steps is determined by
 their placement within the StepProvider. Example:
 
 ```tsx
+"use client";
+
 export default function Page() {
   return (
     <StepProvider>
